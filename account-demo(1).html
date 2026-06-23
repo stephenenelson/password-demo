@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create an Account — Demo</title>
+<style>
+  :root {
+    --cream: #FBF9F5;
+    --ink: #2E2A26;
+    --moss: #56705A;
+    --moss-dark: #3E5641;
+    --clay: #B5694B;
+    --line: #DDD6CB;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .sub {
+    text-align: center;
+    color: #6b6258;
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+  label {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-family: inherit;
+    background: var(--cream);
+  }
+  input:focus {
+    outline: 3px solid var(--moss);
+    outline-offset: 1px;
+  }
+  .strength {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--line);
+    margin: -8px 0 16px;
+    overflow: hidden;
+  }
+  .strength-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--clay);
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+  .strength-label {
+    font-size: 0.85rem;
+    margin: -14px 0 18px;
+    color: #6b6258;
+  }
+  button {
+    width: 100%;
+    padding: 13px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--moss);
+    color: #fff;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover { background: var(--moss-dark); }
+  .switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #6b6258;
+  }
+  .switch a {
+    color: var(--moss-dark);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .error {
+    color: var(--clay);
+    font-size: 0.88rem;
+    margin: -10px 0 14px;
+  }
+  .hidden { display: none; }
+  .welcome {
+    text-align: center;
+  }
+  .welcome img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0 18px;
+  }
+  .note {
+    background: #F3F0EA;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    color: #6b6258;
+    margin-top: 22px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- SIGN UP -->
+  <div id="signupView">
+    <h1>Create Your Account</h1>
+    <div class="sub">Step 1: Choose a username and password</div>
+
+    <label for="suUser">Username</label>
+    <input type="text" id="suUser" autocomplete="off">
+
+    <label for="suPass">Password</label>
+    <input type="password" id="suPass" autocomplete="new-password">
+    <div class="strength"><div class="strength-fill" id="strengthFill"></div></div>
+    <div class="strength-label" id="strengthLabel">Start typing a password…</div>
+
+    <div class="error hidden" id="suError"></div>
+
+    <button onclick="createAccount()">Create Account</button>
+
+    <div class="switch">Already have an account? <a onclick="showLogin()">Log in</a></div>
+  </div>
+
+  <!-- LOG IN -->
+  <div id="loginView" class="hidden">
+    <h1>Log In</h1>
+    <div class="sub">Step 2: Use the account you just created</div>
+
+    <label for="liUser">Username</label>
+    <input type="text" id="liUser" autocomplete="off">
+
+    <label for="liPass">Password</label>
+    <input type="password" id="liPass" autocomplete="current-password">
+
+    <div class="error hidden" id="liError"></div>
+
+    <button onclick="login()">Log In</button>
+
+    <div class="switch">Need an account? <a onclick="showSignup()">Create one</a></div>
+  </div>
+
+  <!-- WELCOME -->
+  <div id="welcomeView" class="hidden welcome">
+    <h1 id="welcomeHeading">You're logged in!</h1>
+    <div class="sub">Here's your reward for a job well done</div>
+    <svg viewBox="0 0 300 220" width="100%" style="max-width:280px;display:block;margin:0 auto 18px;" role="img" aria-label="A cute cartoon cat">
+      <ellipse cx="150" cy="200" rx="90" ry="14" fill="#E7E2D6"/>
+      <ellipse cx="150" cy="140" rx="80" ry="65" fill="#D9A066"/>
+      <path d="M85 95 L70 40 L120 80 Z" fill="#D9A066"/>
+      <path d="M215 95 L230 40 L180 80 Z" fill="#D9A066"/>
+      <path d="M88 90 L78 55 L112 80 Z" fill="#F2C9A0"/>
+      <path d="M212 90 L222 55 L188 80 Z" fill="#F2C9A0"/>
+      <ellipse cx="150" cy="150" rx="62" ry="50" fill="#F2C9A0"/>
+      <circle cx="120" cy="135" r="9" fill="#2E2A26"/>
+      <circle cx="180" cy="135" r="9" fill="#2E2A26"/>
+      <circle cx="123" cy="131" r="2.5" fill="#fff"/>
+      <circle cx="183" cy="131" r="2.5" fill="#fff"/>
+      <path d="M150 150 L142 160 L158 160 Z" fill="#B5694B"/>
+      <path d="M150 160 Q150 168 140 168" stroke="#2E2A26" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M150 160 Q150 168 160 168" stroke="#2E2A26" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="95" y1="155" x2="55" y2="148" stroke="#2E2A26" stroke-width="1.5"/>
+      <line x1="95" y1="162" x2="55" y2="165" stroke="#2E2A26" stroke-width="1.5"/>
+      <line x1="205" y1="155" x2="245" y2="148" stroke="#2E2A26" stroke-width="1.5"/>
+      <line x1="205" y1="162" x2="245" y2="165" stroke="#2E2A26" stroke-width="1.5"/>
+      <circle cx="105" cy="148" r="10" fill="#E89B8C" opacity="0.5"/>
+      <circle cx="195" cy="148" r="10" fill="#E89B8C" opacity="0.5"/>
+    </svg>
+    <button onclick="logout()">Log Out</button>
+  </div>
+
+  <div class="note">
+    Demo only — nothing here is saved or sent anywhere. Refreshing the page clears everything.
+  </div>
+</div>
+
+<script>
+  // In-memory "database" — exists only for this page view, on purpose.
+  let account = null;
+
+  const suUser = document.getElementById('suUser');
+  const suPass = document.getElementById('suPass');
+  const strengthFill = document.getElementById('strengthFill');
+  const strengthLabel = document.getElementById('strengthLabel');
+
+  suPass.addEventListener('input', () => {
+    const v = suPass.value;
+    const len = v.length;
+
+    // Length does almost all the work — this mirrors current guidance
+    // that a long password beats a short, complicated one.
+    let score = 0;
+    if (len >= 8)  score = 1;
+    if (len >= 12) score = 2;
+    if (len >= 16) score = 3;
+    if (len >= 20) score = 4;
+
+    // Mixing character types can nudge the score up by at most 1 level,
+    // but only once length is already decent — it's a bonus, not a substitute.
+    const varietyCount = [/[A-Z]/, /[0-9]/, /[^A-Za-z0-9]/].filter(r => r.test(v)).length;
+    if (len >= 8 && varietyCount >= 2 && score < 4) score++;
+
+    const pct = [0, 25, 50, 75, 100][score];
+    strengthFill.style.width = pct + '%';
+
+    const colors = ['#B5694B', '#B5694B', '#C99A3E', '#7C9A6E', '#56705A'];
+    strengthFill.style.background = colors[score];
+
+    const labels = [
+      'Start typing a password…',
+      'Too short — keep going',
+      'Better — but longer is stronger',
+      'Good length!',
+      'Great — long passwords are hard to crack'
+    ];
+    strengthLabel.textContent = len === 0 ? labels[0] : labels[score];
+  });
+
+  function showLogin() {
+    document.getElementById('signupView').classList.add('hidden');
+    document.getElementById('loginView').classList.remove('hidden');
+    document.getElementById('welcomeView').classList.add('hidden');
+  }
+
+  function showSignup() {
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('signupView').classList.remove('hidden');
+    document.getElementById('welcomeView').classList.add('hidden');
+  }
+
+  function createAccount() {
+    const user = suUser.value.trim();
+    const pass = suPass.value;
+    const err = document.getElementById('suError');
+
+    if (!user || !pass) {
+      err.textContent = 'Please enter a username and password.';
+      err.classList.remove('hidden');
+      return;
+    }
+    err.classList.add('hidden');
+
+    account = { user, pass };
+    document.getElementById('liUser').value = user;
+    document.getElementById('liPass').value = '';
+    showLogin();
+  }
+
+  function login() {
+    const user = document.getElementById('liUser').value.trim();
+    const pass = document.getElementById('liPass').value;
+    const err = document.getElementById('liError');
+
+    if (!account || user !== account.user || pass !== account.pass) {
+      err.textContent = 'Username or password not recognized. Try again, or create an account.';
+      err.classList.remove('hidden');
+      return;
+    }
+    err.classList.add('hidden');
+
+    document.getElementById('welcomeHeading').textContent = 'Welcome back, ' + user + '!';
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('welcomeView').classList.remove('hidden');
+  }
+
+  function logout() {
+    document.getElementById('liPass').value = '';
+    showLogin();
+  }
+</script>
+
+</body>
+</html>
